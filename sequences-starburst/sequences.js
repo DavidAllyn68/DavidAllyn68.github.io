@@ -18,7 +18,6 @@ var colors = {
   "end": "#bbbbbb"
 };
 
-
 // Total size of all segments; we set this later, after loading the data.
 var totalSize = 0;
 
@@ -40,7 +39,7 @@ var arc = d3.arc()
 
 // Use d3.text and d3.csvParseRows so that we do not need to have a header
 // row, and can receive the csv as an array of arrays.
-d3.text("sequences.csv", function(text) {
+d3.text("visit-sequences.csv", function(text) {
   var csv = d3.csvParseRows(text);
   var json = buildHierarchy(csv);
   createVisualization(json);
