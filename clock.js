@@ -64,7 +64,7 @@ function tick() {
       .each(function(d) { d.previousValue = this._value; })
     .transition()
       .ease("elastic")
-      .duration(500)
+      .duration(250)
       .each(fieldTransition);
 
   setTimeout(tick, 1000 - Date.now() % 1000);
