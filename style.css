@@ -1,6 +1,6 @@
 
 @font-face {
-  font-family: myFirstFont;
+  font-family: karbon;
   src: url('fonts/Karbon-Regular.otf');
 }
 
@@ -8,11 +8,12 @@ body {
   background: #333;
   margin: auto;
   width: 1090px;
-  font-family: myFirstFont;
+  font-family: karbon;
 }
 
 .arc-text {
-  font: 16px sans-serif;
+  font-family: karbon
+  font-size: 16px;
 }
 
 .arc-center {
