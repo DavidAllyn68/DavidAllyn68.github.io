@@ -31,7 +31,8 @@ var colors = {
    'UCLA Extension:#b3b0c4',
    'School of Theater, Film and Television:#cab8e5',
    'Graduate School of Education and Information Studies:#e9b4cb'
- }
+ };
+ 
 // Total size of all segments; we set this later, after loading the data.
 var totalSize = 0;
 
