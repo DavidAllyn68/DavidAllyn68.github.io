@@ -1,8 +1,14 @@
 
+@font-face {
+  font-family: myFirstFont;
+  src: url('fonts/Karbon-Regular.otf');
+}
+
 body {
   background: #222;
   margin: auto;
   width: 960px;
+  font-family: myFirstFont;
 }
 
 .arc-text {
