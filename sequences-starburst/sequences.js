@@ -9,30 +9,29 @@ var b = {
 };
 
 // Mapping of step names to colors.
-var colors = {
-    "Chancellor's Greatest Needs:#e6bbb2",
-   'Fielding School of Public Health:#e6bb9b',
-   'College of Letters and Science:#d5c5a1',
-   'School of Nursing:#c9d2a8',
-   'Intercollegiate Athletics:#ced3be',
-   'David Geffen School of Medicine:#daf4c5',
-   'UCLA Samueli:#aed0a0',
-   'General Campus:#acd8ba',
-   'School of Law:#9db7b1',
-   'School of the Arts and Architecture:#72c8b8',
-   'School of Dentistry:#c6e1db',
-   'UCLA Herb Alpert School of Music:#a1d8cd',
-   'International Institute:#94d9df',
-   'UCLA Library:#add4e0',
-   'UCLA Anderson:#7cd3eb',
-   'Luskin School of Public Affairs:#99ceeb',
-   'Student Affairs:#a1bde6',
-   'Institute of American Cultures:#d5d2e7',
-   'UCLA Extension:#b3b0c4',
-   'School of Theater, Film and Television:#cab8e5',
-   'Graduate School of Education and Information Studies:#e9b4cb'
- };
- 
+var colors = { "Chancellor's Greatest Needs":"#e6bbb2",
+"Fielding School of Public Health":"#e6bb9b",
+"College of Letters and Science":"#d5c5a1",
+"School of Nursing":"#c9d2a8",
+"Intercollegiate Athletics":"#ced3be",
+"David Geffen School of Medicine":"#daf4c5",
+"UCLA Samueli":"#aed0a0",
+"General Campus":"#acd8ba",
+"School of Law":"#9db7b1",
+"School of the Arts and Architecture":"#72c8b8",
+"School of Dentistry":"#c6e1db",
+"UCLA Herb Alpert School of Music":"#a1d8cd",
+"International Institute":"#94d9df",
+"UCLA Library":"#add4e0",
+"UCLA Anderson":"#7cd3eb",
+"Luskin School of Public Affairs":"#99ceeb",
+"Student Affairs":"#a1bde6",
+"Institute of American Cultures":"#d5d2e7",
+"UCLA Extension":"#b3b0c4",
+"School of Theater, Film and Television":"#cab8e5",
+"Graduate School of Education and Information Studies":"#e9b4cb",
+"Graduate Education":"#e0c7ce" };
+
 // Total size of all segments; we set this later, after loading the data.
 var totalSize = 0;
 
