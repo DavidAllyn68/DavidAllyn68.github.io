@@ -17,9 +17,12 @@ body {
   font-size: 24px;
 }
 
-a {
-  font-family: karbon-regular
+h1 {
+  font-family: karbon-bold;
+  font-size: 40px;
+  color: skyblue;
 }
+
 .arc-text {
   font-family: karbon
   font-size: 16px;
