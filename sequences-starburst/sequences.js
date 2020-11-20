@@ -1,23 +1,37 @@
 // Dimensions of sunburst.
-var width = 750;
-var height = 600;
+var width = 1080;
+var height = 1920;
 var radius = Math.min(width, height) / 2;
 
 // Breadcrumb dimensions: width, height, spacing, width of tip/tail.
 var b = {
-  w: 75, h: 30, s: 3, t: 10
+  w: 300, h: 30, s: 10, t: 30
 };
 
 // Mapping of step names to colors.
 var colors = {
-  "home": "#5687d1",
-  "product": "#7b615c",
-  "search": "#de783b",
-  "account": "#6ab975",
-  "other": "#a173d1",
-  "end": "#bbbbbb"
-};
-
+    "Chancellor's Greatest Needs:#e6bbb2",
+   'Fielding School of Public Health:#e6bb9b',
+   'College of Letters and Science:#d5c5a1',
+   'School of Nursing:#c9d2a8',
+   'Intercollegiate Athletics:#ced3be',
+   'David Geffen School of Medicine:#daf4c5',
+   'UCLA Samueli:#aed0a0',
+   'General Campus:#acd8ba',
+   'School of Law:#9db7b1',
+   'School of the Arts and Architecture:#72c8b8',
+   'School of Dentistry:#c6e1db',
+   'UCLA Herb Alpert School of Music:#a1d8cd',
+   'International Institute:#94d9df',
+   'UCLA Library:#add4e0',
+   'UCLA Anderson:#7cd3eb',
+   'Luskin School of Public Affairs:#99ceeb',
+   'Student Affairs:#a1bde6',
+   'Institute of American Cultures:#d5d2e7',
+   'UCLA Extension:#b3b0c4',
+   'School of Theater, Film and Television:#cab8e5',
+   'Graduate School of Education and Information Studies:#e9b4cb'
+ }
 // Total size of all segments; we set this later, after loading the data.
 var totalSize = 0;
 
