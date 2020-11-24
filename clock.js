@@ -15,7 +15,7 @@ var bar_color = d3.scale.linear()
     .interpolate(function(a, b) { var i = d3.interpolateString(a, b); return function(t) { return d3.hsl(i(t)); }; });
 
 var text_color = d3.scale.linear()
-    .range([]"hsl(0,100%,100%)","hsl(0,0%,0%)"])
+    .range(["hsl(0,100%,100%)","hsl(0,0%,0%)"])
     .interpolate(function(a, b) { var i = d3.interpolateString(a, b); return function(t) { return d3.hsl(i(t)); }; });
 
 var arcBody = d3.svg.arc()
