@@ -11,7 +11,7 @@ var formatSecond = d3.time.format("%-S seconds"),
     formatMonth = d3.time.format("%B");
 
 var color = d3.scale.linear()
-    .range(["hsl(-180,60%,50%)", "hsl(180,60%,50%)"])
+    .range(["hsl(200,0%,0%)", "hsl(0,60%,50%)"])
     .interpolate(function(a, b) { var i = d3.interpolateString(a, b); return function(t) { return d3.hsl(i(t)); }; });
 
 var arcBody = d3.svg.arc()
