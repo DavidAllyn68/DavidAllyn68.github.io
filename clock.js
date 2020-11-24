@@ -10,10 +10,14 @@ var formatSecond = d3.time.format("%-S seconds"),
     formatDate = function(d) { d = d.getDate(); switch (10 <= d && d <= 19 ? 10 : d % 10) { case 1: d += "st"; break; case 2: d += "nd"; break; case 3: d += "rd"; break; default: d += "th"; break; } return d; },
     formatMonth = d3.time.format("%B");
 
-var bar_color = d3.scale.linear()
-    .range(["hsl(217, 45%, 0%)", "hsl(210, 77%, 56%)"])
-    .interpolate(function(a, b) { var i = d3.interpolateString(a, b); return function(t) { return d3.hsl(i(t)); }; });
+// var bar_color = d3.scale.linear()
+//     .range(["hsl(217, 45%, 0%)", "hsl(210, 77%, 56%)"])
+//     .interpolate(function(a, b) { var i = d3.interpolateString(a, b); return function(t) { return d3.hsl(i(t)); }; });
 
+var bar_color = d3.scaleSequential()
+    .domain([0,99])
+    .interpolate(d3.interpolate("purple","orange"));
+    
 var text_color = d3.scale.linear()
     .range(["hsl(0,100%,100%)","hsl(0,0%,0%)"])
     .interpolate(function(a, b) { var i = d3.interpolateString(a, b); return function(t) { return d3.hsl(i(t)); }; });
