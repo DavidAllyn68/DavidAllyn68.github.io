@@ -10,8 +10,12 @@ var formatSecond = d3.time.format("%-S seconds"),
     formatDate = function(d) { d = d.getDate(); switch (10 <= d && d <= 19 ? 10 : d % 10) { case 1: d += "st"; break; case 2: d += "nd"; break; case 3: d += "rd"; break; default: d += "th"; break; } return d; },
     formatMonth = d3.time.format("%B");
 
-var color = d3.scale.linear()
+var bar_color = d3.scale.linear()
     .range(["hsl(200,0%,0%)", "hsl(0,60%,50%)"])
+    .interpolate(function(a, b) { var i = d3.interpolateString(a, b); return function(t) { return d3.hsl(i(t)); }; });
+
+var text_color = d3.scale.linear()
+    .range([]"hsl(0,100%,100%)","hsl(0,0%,0%)"])
     .interpolate(function(a, b) { var i = d3.interpolateString(a, b); return function(t) { return d3.hsl(i(t)); }; });
 
 var arcBody = d3.svg.arc()
@@ -75,13 +79,14 @@ function fieldTransition() {
 
   field.select(".arc-body")
       .attrTween("d", arcTween(arcBody))
-      .style("fill", function(d) { return color(d.value); });
+      .style("fill", function(d) { return bar_color(d.value); });
 
   field.select(".arc-center")
       .attrTween("d", arcTween(arcCenter));
 
   field.select(".arc-text")
-      .text(function(d) { return d.text; });
+      .text(function(d) { return d.text; })
+      .style("color", function(d) { return text_color(d.value); });
 }
 
 function arcTween(arc) {
