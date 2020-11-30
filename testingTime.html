@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript">
+  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+  var week_days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+  var number_suffix = ["th","st","nd","rd"];
+
+  var number_suffix = ['th','st','nd','rd'];
+  var num = 23;
+  var last_digit = num.toString().substr(1) * 1;
+
+  var suffix = number_suffix[
+  	(num >= 11 && num <= 13) || (last_digit == 0) || (last_digit > 3) ? 0 : last_digit
+    ];
+
+  var n = num + suffix;
+
+  var formatSecond = d3.time.format("%-S seconds"),
+      formatMinute = d3.time.format("%-M minutes"),
+      formatHour = d3.time.format("%-H hours"),
+      formatDay = d3.time.format("%A"),
+      formatDate = function(d) { d = d.getDate(); switch (10 <= d && d <= 19 ? 10 : d % 10) { case 1: d += "st"; break; case 2: d += "nd"; break; case 3: d += "rd"; break; default: d += "th"; break; } return d; },
+      formatMonth = d3.time.format("%B");
+
+  function setTimeDataForNow() {
+    //
+    var now = new Date;
+    return [
+      {index: .7, text: formatSecond(now), value: now.getSeconds() / 60},
+      {index: .6, text: formatMinute(now), value: now.getMinutes() / 60},
+      {index: .5, text: formatHour(now),   value: now.getHours() / 24},
+      {index: .3, text: formatDay(now),    value: now.getDay() / 7},
+      {index: .2, text: formatDate(now),   value: (now.getDate() - 1) / (32 - new Date(now.getYear(), now.getMonth(), 32).getDate())},
+      {index: .1, text: formatMonth(now),  value: now.getMonth() / 12}
+    ];
+  }
+
+
+  function showTime(){
+  	var now = new Date();
+  	document.getElementById('time').innerHTML = now;
+    document.getElementById('year').innerHTML = now.getFullYear();
+    document.getElementById('month').innerHTML = months[now.getMonth()];
+    document.getElementById('weekday').innerHTML = week_days[now.getDay()];
+    var date = now.getDate();
+    var last_digit =
+    var date_display = date + number_suffix[d < 10 ? d-10 : d%10];
+    document.getElementById('day').innerHTML = date_display;
+    document.getElementById('hour').innerHTML = now.getHours();
+    document.getElementById('minute').innerHTML = now.getMinutes();
+    document.getElementById('second').innerHTML = now.getSeconds();
+
+      //do it every so often
+  	setTimeout(showTime,1000 - Date.now() % 1000);
+  }
+
+  </script>
+</head>
+<body>
+
+
+  <p id="time">hi<p>
+  <p id="year"><p>
+  <p id="month"><p>
+  <p id="weekday"><p>
+  <p id="day"><p>
+  <p id="hour"><p>
+  <p id="minute"><p>
+  <p id="second"><p>
+  <script type="text/javascript"> showTime(); </script>
+
+</body>
+</html>
