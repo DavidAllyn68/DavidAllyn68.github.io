@@ -15,8 +15,8 @@ function getWindowSize() {
 }
 
 //the general dimensions of the clock
-var width = getWindowSize()['width']*.9,
-    height = getWindowSize()['height']*.9,
+var width = getWindowSize()['width'],
+    height = getWindowSize()['height'],
     radius = Math.min(width, height) / 1.9,
     spacing = .08; //the spacing between bars .1 is where the bars touch
 
