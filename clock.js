@@ -72,7 +72,7 @@ var svg = d3.select("body").append("svg")
     .attr("height", height)
     //create a gouping and move it to center
   .append("g")
-    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    //.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 
 var field = svg.selectAll("g")
