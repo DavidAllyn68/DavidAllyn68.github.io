@@ -1,0 +1,5 @@
+name	value
+David Geffin School of Medicine	5.3
+Anderson School of Management	2.7
+Mo Ostin School of Music	8
+Lusking School of Public Affairs	10

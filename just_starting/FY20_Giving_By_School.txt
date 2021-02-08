@@ -1,0 +1,23 @@
+SchoolName	TotalRevenueAmount
+Chancellor's Greatest Needs	2735448.44
+College of Letters and Science	201771487
+David Geffen School of Medicine	319792065.8
+Fielding School of Public Health	14700482.64
+General Campus	109475563.6
+Graduate Education	556038.91
+Graduate School of Education and Information Studies	20605974.68
+Institute of American Cultures	659990.38
+Intercollegiate Athletics	28847485.03
+International Institute	34219616.43
+Luskin School of Public Affairs	10658609.55
+School of Dentistry	3288496.5
+School of Law	52074763.09
+School of Nursing	1421600.21
+School of the Arts and Architecture	69893226.83
+"School of Theater, Film and Television"	16307401.32
+Student Affairs	15364995.51
+UCLA Anderson	55645119.18
+UCLA Extension	231182.89
+UCLA Herb Alpert School of Music	19015138.38
+UCLA Library	5365936.33
+UCLA Samueli	56165594.16

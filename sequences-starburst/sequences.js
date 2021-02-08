@@ -1,12 +1,7 @@
 // Dimensions of sunburst.
-var width = 1080;
-var height = 1920;
+var width = 800;
+var height = 800;
 var radius = Math.min(width, height) / 2;
-
-// Breadcrumb dimensions: width, height, spacing, width of tip/tail.
-var b = {
-  w: 100, h: 30, s: 10, t: 30
-};
 
 // Mapping of step names to colors.
 var colors = { "Chancellor's Greatest Needs":"#e6bbb2",
@@ -42,6 +37,7 @@ var vis = d3.select("#chart").append("svg:svg")
     .attr("id", "container")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
+
 var partition = d3.partition()
     .size([2 * Math.PI, radius * radius]);
 
@@ -62,11 +58,6 @@ d3.text("sequences.csv", function(text) {
 // Main function to draw and set up the visualization, once we have the data.
 function createVisualization(json) {
 
-  // Basic setup of page elements.
-  initializeBreadcrumbTrail();
-  drawLegend();
-  d3.select("#togglelegend").on("click", toggleLegend);
-
   // Bounding circle underneath the sunburst, to make it easier to detect
   // when the mouse leaves the parent g.
   vis.append("svg:circle")
@@ -81,7 +72,7 @@ function createVisualization(json) {
   // For efficiency, filter nodes to keep only those large enough to see.
   var nodes = partition(root).descendants()
       .filter(function(d) {
-          return (d.x1 - d.x0 > 0.005); // 0.005 radians = 0.29 degrees
+          return (d.x1 - d.x0 > 0.0005); // 0.005 radians = 0.029 degrees
       });
 
   var path = vis.data([json]).selectAll("path")
@@ -94,6 +85,14 @@ function createVisualization(json) {
       .style("opacity", 1)
       .on("mouseover", mouseover);
 
+  // Center labels
+  var bigText = vis.append('text')
+      .
+      // .attr("id","#big-text")
+      // .style("z","-1")
+      // .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+      // .attr("text-anchor", "middle");
+
   // Add the mouseleave handler to the bounding circle.
   d3.select("#container").on("mouseleave", mouseleave);
 
@@ -103,22 +102,45 @@ function createVisualization(json) {
 
 // Fade all but the current sequence, and show it in the breadcrumb trail.
 function mouseover(d) {
-
+  //when a user mouses over the chart,
+  //highlight the section and show detail in chart center
+  var giving_amount = "$" + (d.value/1000000).toPrecision(2).toString() + "M";
   var percentage = (100 * d.value / totalSize).toPrecision(3);
-  var percentageString = percentage + "%";
+  var percentageString = percentage + "% of Total Giving";
   if (percentage < 0.1) {
     percentageString = "< 0.1%";
   }
 
-  d3.select("#percentage")
-      .text(percentageString);
-
-  d3.select("#explanation")
-      .style("visibility", "");
-
   var sequenceArray = d.ancestors().reverse();
   sequenceArray.shift(); // remove root node from the array
-  updateBreadcrumbs(sequenceArray, percentageString);
+
+
+  //updateBreadcrumbs(sequenceArray, percentageString);
+
+  //var givingUnitStrings = d.map(i => i.name);
+  //console.log(givingUnitStrings);
+
+  var sequenceString = "Place Holder";
+  var text = d3.selectAll("text")
+
+  d3.selectAll("#giving_amount")
+      .text(giving_amount);
+
+  text.select("#giving_percentage")
+      .text(percentageString);
+
+  // d3.select("#giving_unit");
+  //     .text(sequenceString);
+
+  bigText.selectAll('#big-text')
+     .data( ["Accessed by", 500, "students"] )
+     .join('tspan')
+     .attr('x', 0)
+     .attr('y', -30)
+     .attr('font-size', 20)
+     .style('font-weight', (d,i) => i!==1 ? undefined : 'bold')
+     .attr('dy', (d,i) => i ? (1.5*i) + 'em' : 0)
+     .text( d => d );
 
   // Fade all the segments.
   d3.selectAll("path")
@@ -134,7 +156,6 @@ function mouseover(d) {
 
 // Restore everything to full opacity when moving off the visualization.
 function mouseleave(d) {
-
   // Hide the breadcrumb trail
   d3.select("#trail")
       .style("visibility", "hidden");
@@ -150,123 +171,11 @@ function mouseleave(d) {
       .on("end", function() {
               d3.select(this).on("mouseover", mouseover);
             });
-
   d3.select("#explanation")
       .style("visibility", "hidden");
 }
 
-function initializeBreadcrumbTrail() {
-  // Add the svg area.
-  var trail = d3.select("#sequence").append("svg:svg")
-      .attr("width", width)
-      .attr("height", 50)
-      .attr("id", "trail");
-  // Add the label at the end, for the percentage.
-  trail.append("svg:text")
-    .attr("id", "endlabel")
-    .style("fill", "#000");
-}
-
-// Generate a string that describes the points of a breadcrumb polygon.
-function breadcrumbPoints(d, i) {
-  var points = [];
-  points.push("0,0");
-  points.push(b.w + ",0");
-  points.push(b.w + b.t + "," + (b.h / 2));
-  points.push(b.w + "," + b.h);
-  points.push("0," + b.h);
-  if (i > 0) { // Leftmost breadcrumb; don't include 6th vertex.
-    points.push(b.t + "," + (b.h / 2));
-  }
-  return points.join(" ");
-}
-
-// Update the breadcrumb trail to show the current sequence and percentage.
-function updateBreadcrumbs(nodeArray, percentageString) {
-
-  // Data join; key function combines name and depth (= position in sequence).
-  var trail = d3.select("#trail")
-      .selectAll("g")
-      .data(nodeArray, function(d) { return d.data.name + d.depth; });
-
-  // Remove exiting nodes.
-  trail.exit().remove();
-
-  // Add breadcrumb and label for entering nodes.
-  var entering = trail.enter().append("svg:g");
-
-  entering.append("svg:polygon")
-      .attr("points", breadcrumbPoints)
-      .style("fill", function(d) { return colors[d.data.name]; });
-
-  entering.append("svg:text")
-      .attr("x", (b.w + b.t) / 2)
-      .attr("y", b.h / 2)
-      .attr("dy", "0.35em")
-      .attr("text-anchor", "middle")
-      .text(function(d) { return d.data.name; });
-
-  // Merge enter and update selections; set position for all nodes.
-  entering.merge(trail).attr("transform", function(d, i) {
-    return "translate(" + i * (b.w + b.s) + ", 0)";
-  });
-
-  // Now move and update the percentage at the end.
-  d3.select("#trail").select("#endlabel")
-      .attr("x", (nodeArray.length + 0.5) * (b.w + b.s))
-      .attr("y", b.h / 2)
-      .attr("dy", "0.35em")
-      .attr("text-anchor", "middle")
-      .text(percentageString);
-
-  // Make the breadcrumb trail visible, if it's hidden.
-  d3.select("#trail")
-      .style("visibility", "");
-
-}
-
-function drawLegend() {
-
-  // Dimensions of legend item: width, height, spacing, radius of rounded rect.
-  var li = {
-    w: 75, h: 30, s: 3, r: 3
-  };
-
-  var legend = d3.select("#legend").append("svg:svg")
-      .attr("width", li.w)
-      .attr("height", d3.keys(colors).length * (li.h + li.s));
-
-  var g = legend.selectAll("g")
-      .data(d3.entries(colors))
-      .enter().append("svg:g")
-      .attr("transform", function(d, i) {
-              return "translate(0," + i * (li.h + li.s) + ")";
-           });
-
-  g.append("svg:rect")
-      .attr("rx", li.r)
-      .attr("ry", li.r)
-      .attr("width", li.w)
-      .attr("height", li.h)
-      .style("fill", function(d) { return d.value; });
-
-  g.append("svg:text")
-      .attr("x", li.w / 2)
-      .attr("y", li.h / 2)
-      .attr("dy", "0.35em")
-      .attr("text-anchor", "middle")
-      .text(function(d) { return d.key; });
-}
-
-function toggleLegend() {
-  var legend = d3.select("#legend");
-  if (legend.style("visibility") == "hidden") {
-    legend.style("visibility", "");
-  } else {
-    legend.style("visibility", "hidden");
-  }
-}
-
+//------- TRANSFORM DATA --------//
 // Take a 2-column CSV and transform it into a hierarchical structure suitable
 // for a partition layout. The first column is a sequence of step names, from
 // root to leaf, separated by hyphens. The second column is a count of how

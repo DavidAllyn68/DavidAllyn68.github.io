@@ -13,26 +13,13 @@ body {
   width: 750px;
 }
 
-#sidebar {
-  float: right;
-  width: 300px;
-}
-
-#sequence {
-  width: 800px;
-  height: 70px;
-}
-
-#legend {
-  padding: 10px 0 0 3px;
-}
-
-#sequence text, #legend text {
+#chart_header text{
   font-weight: 600;
   fill: #fff;
 }
 
 #chart {
+  float: left;
   position: relative;
 }
 
@@ -41,15 +28,15 @@ body {
 }
 
 #explanation {
-  position: absolute;
-  top: 260px;
-  left: 305px;
-  width: 140px;
+  float: inherit;
   text-align: center;
   color: #666;
   z-index: -1;
 }
 
-#percentage {
+#giving_amount {
+  font-size: 10em;
+}
+#giving_percentage #giving_unit {
   font-size: 2.5em;
 }

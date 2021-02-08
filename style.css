@@ -17,6 +17,9 @@ body {
   font-size: 24px;
 }
 
+a {
+  color:#ABCDEF
+}
 h1 {
   font-family: karbon-bold;
   font-size: 40px;
